@@ -11,7 +11,6 @@ import '../mystore.dart';
 
 import '../../constants.dart' as constants;
 
-
 class NextQuestion extends VxMutation<MyStore> {
   @override
   Future<void> perform() async {
@@ -34,8 +33,6 @@ class NextQuestion extends VxMutation<MyStore> {
     }
   }
 }
-
-
 
 class FetchQotd extends VxMutation<MyStore> {
   @override
@@ -80,13 +77,14 @@ class FetchAnswers extends VxMutation<MyStore> {
             j < constants.qotdNumber) {
           store!.resultsQOTD[j] = object['is_correct'];
           j++;
+
           store!.currentQuestion++;
         }
       }
     }
     store!.answers.sort((a1, a2) => a1.date.compareTo(a2.date));
 
-    store!.qotdDone |= store!.verifAlreadyAnsweredQOTD();
+    store!.qotdDone |= (store!.currentQuestion == constants.qotdNumber);
     store!.isLogingIn = false;
   }
 }

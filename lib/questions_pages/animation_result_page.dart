@@ -76,6 +76,8 @@ class _RotationTransitionState extends State<RotationTransitionExample>
 }
 
 List<TweenSequenceItem<double>> getTweenSequenceItem(int nbOfTurns) {
+  //Here we start at 1/2 to make the circle disapear (its rotation makes it
+  //on the vertical plan) and then add as many turns as needed.
   List<TweenSequenceItem<double>> list = [];
   if (nbOfTurns == 0) {
     return list;

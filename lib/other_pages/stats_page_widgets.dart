@@ -91,7 +91,13 @@ Widget getBottomTitlesWidget(DateTime filterSince) {
 }
 
 List<Map<String, dynamic>> getDataGraph(
-    List<String> categories, DateTime filterSince) {
+    //The idea is to group answers that are the same day in order to avoid quick
+    //changes in the graph since they will all be seperated by 1 day.
+    //Whereas if we just take the answer date the time between two answers can be
+    //as low as 2 seconds resulting in an almost vertical change in the graph.
+    //because compared to 1 day between two quiz, 2 seconds seems instantaneous
+    List<String> categories,
+    DateTime filterSince) {
   MyStore store = VxState.store;
   List<Answer> answersFiltered = store.answers
       .where((answer) =>
@@ -316,7 +322,7 @@ List<Widget> getBottomStats() {
         Expanded(
           flex: 8,
           child: AutoSizeText(
-            store.getLongestStreak().toString(),
+            getLongestStreak().toString(),
             style: bottomNumberStyle,
             textAlign: TextAlign.center,
             group: dataGroup,
@@ -327,7 +333,7 @@ List<Widget> getBottomStats() {
         Expanded(
           flex: 8,
           child: AutoSizeText(
-            store.getCurrentStreak().toString(),
+            getCurrentStreak().toString(),
             style: bottomNumberStyle,
             textAlign: TextAlign.center,
             group: dataGroup,
@@ -350,4 +356,33 @@ Widget getDropDownMenuItemChild(String text) {
       ),
     ),
   );
+}
+
+int getLongestStreak() {
+  MyStore store = VxState.store;
+  int streak = 0;
+  int longestStreak = 0;
+  for (int i = 0; i < store.answers.length; i++) {
+    if (store.answers[i].isCorrect) {
+      streak++;
+      if (streak > longestStreak) {
+        longestStreak = streak;
+      }
+    } else {
+      streak = 0;
+    }
+  }
+  return longestStreak;
+}
+
+int getCurrentStreak() {
+  MyStore store = VxState.store;
+  int streak = 0;
+  for (int i = store.answers.length - 1; i > 0; i--) {
+    if (!store.answers[i].isCorrect) {
+      return streak;
+    }
+    streak++;
+  }
+  return streak;
 }

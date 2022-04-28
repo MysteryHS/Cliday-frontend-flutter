@@ -5,11 +5,11 @@ import 'package:app/main_page/widgets_main.dart';
 import 'package:app/other_pages/stats_page.dart';
 import 'package:app/questions_pages/question_page.dart';
 import 'package:app/questions_pages/result_page.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:vxstate/vxstate.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 import 'account_pages/login_page.dart';
 import 'store/mutations/account_mutations.dart';

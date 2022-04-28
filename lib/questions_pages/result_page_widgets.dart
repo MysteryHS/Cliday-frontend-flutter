@@ -9,8 +9,6 @@ import '../store/mystore.dart';
 import '../constants.dart' as constants;
 import 'animation_result_page.dart';
 
-final MyStore store = VxState.store;
-
 Widget shareButton = ElevatedButton.icon(
   icon: const Icon(
     Icons.share,
@@ -22,7 +20,7 @@ Widget shareButton = ElevatedButton.icon(
   ),
   onPressed: () async {
     await Share.share(
-      store.getShareText(),
+      getShareText(),
       subject: "Résultat du jour !",
     );
   },
@@ -116,4 +114,14 @@ List<Widget> getWidgetsResults() {
       },
     )
   ].toList();
+}
+
+String getShareText() {
+  final MyStore store = VxState.store;
+  String res = "Climate QOTD !\n";
+  for (bool isCorrect in store.resultsQOTD) {
+    res += isCorrect ? "🟢" : "🔴";
+  }
+
+  return res + (store.resultsQOTD.contains(false) ? "" : "✨");
 }

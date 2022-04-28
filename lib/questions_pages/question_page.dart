@@ -29,7 +29,7 @@ class _QuestionPageState extends State<QuestionPage> {
       body: SafeArea(
         child: VxBuilder<MyStore>(
           builder: (context, store, status) {
-            _question = store.getQuestion();
+            _question = getQuestion();
 
             if (_question != null) {
               choicesList = <Widget>[];
@@ -113,4 +113,12 @@ class _QuestionPageState extends State<QuestionPage> {
       ),
     );
   }
+}
+
+Question? getQuestion() {
+  final MyStore store = VxState.store;
+  return store.questions.length > store.currentQuestion &&
+          store.currentQuestion < constants.qotdNumber
+      ? store.questions[store.currentQuestion]
+      : null;
 }

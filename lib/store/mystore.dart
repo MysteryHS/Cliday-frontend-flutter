@@ -35,73 +35,8 @@ class MyStore extends VxStore {
   bool stayConnected = true;
   bool qotdDone = false;
 
-  Question? getQuestion() {
-    return questions.length > currentQuestion &&
-            currentQuestion < constants.qotdNumber
-        ? questions[currentQuestion]
-        : null;
-  }
-
-  List<String> getCategories() {
-    return answers.map((e) => e.category).toSet().toList();
-  }
-
-  int getLongestStreak() {
-    int streak = 0;
-    int longestStreak = 0;
-    for (int i = 0; i < answers.length; i++) {
-      if (answers[i].isCorrect) {
-        streak++;
-        if (streak > longestStreak) {
-          longestStreak = streak;
-        }
-      } else {
-        streak = 0;
-      }
-    }
-    return longestStreak;
-  }
-
   int getNumberCorrectAnswers() {
     return answers.where((element) => element.isCorrect).length;
-  }
-
-  int getCurrentStreak() {
-    int streak = 0;
-    for (int i = answers.length - 1; i > 0; i--) {
-      if (!answers[i].isCorrect) {
-        return streak;
-      }
-      streak++;
-    }
-    return streak;
-  }
-
-  String getShareText() {
-    String res = "Climate QOTD !\n";
-    for (bool isCorrect in resultsQOTD) {
-      res += isCorrect ? "🟢" : "🔴";
-    }
-
-    return res + (resultsQOTD.contains(false) ? "" : "✨");
-  }
-
-  String getResultText() {
-    return resultsQOTD.where((element) => element).length.toString() +
-        '/' +
-        resultsQOTD.length.toString();
-  }
-
-  //TODO move functions to where there needed
-  bool verifAlreadyAnsweredQOTD() {
-    for (Question quest in questions) {
-      final results = answers.where((element) =>
-          element.questionId == quest.id && constants.isToday(element.date));
-      if (results.length == constants.qotdNumber) {
-        return true;
-      }
-    }
-    return false;
   }
 
   void removeStorageCredentials() async {

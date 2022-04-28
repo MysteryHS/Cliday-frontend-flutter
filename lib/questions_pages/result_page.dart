@@ -30,7 +30,7 @@ class _ResultPageState extends State<ResultPage> {
           const Spacer(),
           Center(
             child: Text(
-              store.getResultText(),
+              getResultText(),
               style: TextStyle(
                 fontSize: 100,
                 color: constants.secondColor,
@@ -61,4 +61,11 @@ class _ResultPageState extends State<ResultPage> {
       ),
     );
   }
+}
+
+String getResultText() {
+  final MyStore store = VxState.store;
+  return store.resultsQOTD.where((isCorrect) => isCorrect).length.toString() +
+      '/' +
+      store.resultsQOTD.length.toString();
 }
