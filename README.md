@@ -1,4 +1,4 @@
-# app
+# Cliday
 
 La procédure d'installation fonctionne pour Windows / Android / vscode car je n'ai pas de mac et donc je n'ai pas pu tester dessus.
 
