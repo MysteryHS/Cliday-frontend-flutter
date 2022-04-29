@@ -1,16 +1,29 @@
 # app
 
-A new Flutter project.
+La procédure d'installation fonctionne pour Windows / Android / vscode car je n'ai pas de mac et donc je n'ai pas pu tester dessus.
 
-## Getting Started
+Procédure d'installation :
 
-This project is a starting point for a Flutter application.
+Installer Flutter : https://docs.flutter.dev/get-started/install
 
-A few resources to get you started if this is your first Flutter project:
+Installer Android Studio : https://developer.android.com/studio
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+S'assurer d'avoir github cli d'installé.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
+gh repo clone MysteryHS/Cliday-frontend-flutter
+cd .\Cliday-frontend-flutter\
+flutter pub get
+```
+
+Configurer un éditeur : https://docs.flutter.dev/get-started/editor
+
+Ajouter un AVD : https://developer.android.com/studio/run/managing-avds
+
+Selectionner l'avd créé dans vscode (en bas à droite)
+
+https://docs.flutter.dev/get-started/test-drive?tab=vscode
+
+Appuyer sur F5 pour lancer le debug.
+
+Pour build l'app : ```flutter build apk --no-shrink```
