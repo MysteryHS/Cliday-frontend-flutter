@@ -21,6 +21,7 @@ class NavigationService {
 }
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MySplashScreen());
 }
 
@@ -31,7 +32,6 @@ initApp() async {
   Navigator.popUntil(
       NavigationService.navigatorKey.currentContext!, (route) => false);
   Navigator.pushNamed(NavigationService.navigatorKey.currentContext!, '/home');
-  //TODO delete all previous routes then push
 }
 
 verifAfterBuild() async {
@@ -40,6 +40,9 @@ verifAfterBuild() async {
   if (!(connectivityResult == ConnectivityResult.mobile ||
       connectivityResult == ConnectivityResult.wifi)) {
     await Future.delayed(const Duration(seconds: 1));
+
+    Navigator.popUntil(
+        NavigationService.navigatorKey.currentContext!, (route) => false);
     Navigator.pushNamed(
         NavigationService.navigatorKey.currentContext!, '/error');
   } else {

@@ -1,3 +1,4 @@
+import 'package:app/questions_pages/result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:share_plus/share_plus.dart';
@@ -21,7 +22,6 @@ Widget shareButton = ElevatedButton.icon(
   onPressed: () async {
     await Share.share(
       getShareText(),
-      subject: "Résultat du jour !",
     );
   },
   label: const FittedBox(
@@ -118,7 +118,7 @@ List<Widget> getWidgetsResults() {
 
 String getShareText() {
   final MyStore store = VxState.store;
-  String res = "Climate QOTD !\n";
+  String res = "Cliday " + getResultText() + "\n";
   for (bool isCorrect in store.resultsQOTD) {
     res += isCorrect ? "🟢" : "🔴";
   }
